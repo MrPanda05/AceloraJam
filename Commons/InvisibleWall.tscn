@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bkhs5f3d8rfx1"]
+
+[node name="InvisibleWall" type="StaticBody2D"]
+collision_layer = 2

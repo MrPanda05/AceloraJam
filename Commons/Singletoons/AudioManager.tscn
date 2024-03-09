@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://duanc2jlfni05"]
+
+[ext_resource type="Script" path="res://Commons/Singletoons/AudioManager.cs" id="1_3pxfk"]
+[ext_resource type="PackedScene" uid="uid://fixncwlpddtj" path="res://Commons/Components/SoundPool.tscn" id="1_7xt0v"]
+[ext_resource type="AudioStream" uid="uid://jr2xkwp5lsjx" path="res://SoundsFX/rockHit4n.wav" id="3_5wm71"]
+[ext_resource type="AudioStream" uid="uid://cp3qabdi26htl" path="res://SoundsFX/RockHit.wav" id="3_rn78k"]
+[ext_resource type="AudioStream" uid="uid://b3g160dxdqa2l" path="res://SoundsFX/RockHit2.wav" id="4_vfcm5"]
+[ext_resource type="AudioStream" uid="uid://blidihaiu0iif" path="res://SoundsFX/Death3.wav" id="5_rv2f8"]
+[ext_resource type="AudioStream" uid="uid://b4hjo4n8swk6e" path="res://SoundsFX/MONSTERdeath.wav" id="6_a4ook"]
+[ext_resource type="AudioStream" uid="uid://vbmeffdonwcb" path="res://SoundsFX/Death4.wav" id="6_layiw"]
+[ext_resource type="AudioStream" uid="uid://ck414hsee86w5" path="res://SoundsFX/MonsterDeath2.wav" id="7_ac0mi"]
+[ext_resource type="AudioStream" uid="uid://n0urbam7bhxi" path="res://SoundsFX/Heal.wav" id="7_r5dv4"]
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("rocksSounds", "playerDeath", "MonsterHit", "healSound")]
+process_mode = 3
+script = ExtResource("1_3pxfk")
+rocksSounds = NodePath("RockHitSounds")
+playerDeath = NodePath("PlayerDeathSounds")
+MonsterHit = NodePath("MonsterDeathSounds")
+healSound = NodePath("HealSound")
+
+[node name="RockHitSounds" parent="." instance=ExtResource("1_7xt0v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RockHitSounds"]
+stream = ExtResource("3_5wm71")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="RockHitSounds"]
+stream = ExtResource("4_vfcm5")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="RockHitSounds"]
+stream = ExtResource("3_rn78k")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="MonsterDeathSounds" parent="." instance=ExtResource("1_7xt0v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MonsterDeathSounds"]
+stream = ExtResource("6_a4ook")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="MonsterDeathSounds"]
+stream = ExtResource("7_ac0mi")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="PlayerDeathSounds" parent="." instance=ExtResource("1_7xt0v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerDeathSounds"]
+stream = ExtResource("5_rv2f8")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="PlayerDeathSounds"]
+stream = ExtResource("6_layiw")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="HealSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_r5dv4")
+max_polyphony = 2
+bus = &"SoundFX"

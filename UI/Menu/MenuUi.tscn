@@ -1,0 +1,276 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdd36bn66ejmf"]
+
+[ext_resource type="Theme" uid="uid://33sjaoimhe12" path="res://Themes/UIbuttons.tres" id="1_p7dcs"]
+[ext_resource type="Script" path="res://UI/Menu/MenuUi.cs" id="1_vpp3g"]
+[ext_resource type="Theme" uid="uid://4xx1mlsgwa8r" path="res://Themes/VolumeSlider.tres" id="3_yg4s3"]
+[ext_resource type="Texture2D" uid="uid://kaem0m2i4wvp" path="res://Art/Moon.png" id="4_q1cy8"]
+[ext_resource type="Texture2D" uid="uid://bm8chtlq6l66k" path="res://Art/SpaceShip1.png" id="5_hdxr8"]
+[ext_resource type="AudioStream" uid="uid://pki5rti0xad0" path="res://SoundsFX/synth.wav" id="6_avvxr"]
+[ext_resource type="Texture2D" uid="uid://vho0gqtffqrv" path="res://Art/BigRingPlannet2.png" id="6_tf3hf"]
+
+[node name="MenuUI" type="Control" node_paths=PackedStringArray("Settings", "Buttons", "TittleScreen", "master", "music", "soundfx", "clickSound")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vpp3g")
+Settings = NodePath("Settings")
+Buttons = NodePath("Buttons")
+TittleScreen = NodePath("TittleScreen")
+master = NodePath("Settings/Master")
+music = NodePath("Settings/Music")
+soundfx = NodePath("Settings/SoundFX")
+clickSound = NodePath("ClickSound")
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+color = Color(0.00784314, 0.184314, 0.25098, 1)
+metadata/_edit_lock_ = true
+
+[node name="Buttons" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 397.0
+offset_right = 1919.0
+offset_bottom = 1079.0
+metadata/_edit_lock_ = true
+
+[node name="Return" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 51.0
+offset_right = 1148.0
+offset_bottom = 139.0
+theme = ExtResource("1_p7dcs")
+text = "Return"
+
+[node name="Settings" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 203.0
+offset_right = 1148.0
+offset_bottom = 291.0
+theme = ExtResource("1_p7dcs")
+text = "Settings
+"
+
+[node name="Quit" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 355.0
+offset_right = 1148.0
+offset_bottom = 443.0
+theme = ExtResource("1_p7dcs")
+text = "Quit
+"
+
+[node name="Label" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 764.0
+offset_top = -245.0
+offset_right = 1201.0
+offset_bottom = -90.0
+theme_override_font_sizes/font_size = 100
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 397.0
+offset_right = 1919.0
+offset_bottom = 1079.0
+metadata/_edit_lock_ = true
+
+[node name="Master" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 179.0
+offset_right = 1212.0
+offset_bottom = 243.0
+theme = ExtResource("3_yg4s3")
+value = 25.0
+
+[node name="SoundFX" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 307.0
+offset_right = 1212.0
+offset_bottom = 371.0
+theme = ExtResource("3_yg4s3")
+value = 25.0
+
+[node name="Music" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 435.0
+offset_right = 1220.0
+offset_bottom = 499.0
+theme = ExtResource("3_yg4s3")
+value = 25.0
+
+[node name="ReturnBust" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 892.0
+offset_top = 595.0
+offset_right = 1084.0
+offset_bottom = 654.0
+theme = ExtResource("1_p7dcs")
+text = "Return"
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 740.0
+offset_top = -245.0
+offset_right = 1220.0
+offset_bottom = -56.0
+theme_override_font_sizes/font_size = 100
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterLabel" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 139.0
+offset_right = 1042.0
+offset_bottom = 181.0
+theme_override_font_sizes/font_size = 30
+text = "Master
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundFXlabel" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 932.0
+offset_top = 267.0
+offset_right = 1057.0
+offset_bottom = 309.0
+theme_override_font_sizes/font_size = 30
+text = "SoundFx
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 924.0
+offset_top = 403.0
+offset_right = 1049.0
+offset_bottom = 445.0
+theme_override_font_sizes/font_size = 30
+text = "Music
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TittleScreen" type="Control" parent="."]
+process_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 8.0
+offset_right = 1592.0
+offset_bottom = 470.0
+theme_override_font_sizes/font_size = 111
+text = "My
+Little
+Space game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 544.0
+offset_right = 1128.0
+offset_bottom = 648.0
+theme = ExtResource("1_p7dcs")
+text = "Start
+"
+
+[node name="Settings" type="Button" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 704.0
+offset_right = 1128.0
+offset_bottom = 808.0
+theme = ExtResource("1_p7dcs")
+text = "Settings"
+
+[node name="Quit" type="Button" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 864.0
+offset_right = 1128.0
+offset_bottom = 968.0
+theme = ExtResource("1_p7dcs")
+text = "Quit
+"
+
+[node name="TextureRect" type="TextureRect" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 152.0
+offset_right = 920.0
+offset_bottom = 216.0
+texture = ExtResource("4_q1cy8")
+
+[node name="TextureRect2" type="TextureRect" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 1664.0
+offset_top = 392.0
+offset_right = 1752.0
+offset_bottom = 480.0
+texture = ExtResource("4_q1cy8")
+flip_h = true
+
+[node name="TextureRect3" type="TextureRect" parent="TittleScreen"]
+layout_mode = 0
+offset_left = 1072.0
+offset_top = 288.0
+offset_right = 1256.0
+offset_bottom = 376.0
+texture = ExtResource("5_hdxr8")
+flip_h = true
+
+[node name="TextureRect4" type="TextureRect" parent="TittleScreen"]
+layout_mode = 0
+offset_left = -488.0
+offset_top = 280.0
+offset_right = 1400.0
+offset_bottom = 1216.0
+mouse_filter = 2
+texture = ExtResource("6_tf3hf")
+flip_h = true
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_avvxr")
+max_polyphony = 3
+bus = &"SoundFX"
+
+[connection signal="button_down" from="Buttons/Return" to="." method="OnReturnButtonDown"]
+[connection signal="button_down" from="Buttons/Settings" to="." method="OnSettingsButtonDown"]
+[connection signal="button_down" from="Buttons/Quit" to="." method="OnQuitButtonDown"]
+[connection signal="value_changed" from="Settings/Master" to="." method="OnMasterValueChanged"]
+[connection signal="value_changed" from="Settings/SoundFX" to="." method="OnSoundFxValueChanged"]
+[connection signal="value_changed" from="Settings/Music" to="." method="OnMusicValueChanged"]
+[connection signal="button_down" from="Settings/ReturnBust" to="." method="OnReturnBustButtonDown"]
+[connection signal="button_down" from="TittleScreen/Start" to="." method="OnStartButtonDown"]
+[connection signal="button_down" from="TittleScreen/Settings" to="." method="OnSettingsButtonTittleDown"]
+[connection signal="button_down" from="TittleScreen/Quit" to="." method="OnQuitButtonDown"]

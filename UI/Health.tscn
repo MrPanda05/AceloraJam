@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsm0g68mosp3v"]
+
+[ext_resource type="Script" path="res://UI/Health.cs" id="1_y34yy"]
+[ext_resource type="Texture2D" uid="uid://b2iiabv0mv6e" path="res://Art/Heart.png" id="2_8o4yj"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_i7mxb"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_gyyli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jshng"]
+bg_color = Color(0.933333, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_by4ni"]
+bg_color = Color(0.984314, 0, 0, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(0.410249, 0.000249071, 0.000136715, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="Theme" id="Theme_xdbl1"]
+HSlider/icons/grabber_disabled = SubResource("ImageTexture_i7mxb")
+HSlider/icons/tick = SubResource("ImageTexture_gyyli")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_jshng")
+HSlider/styles/slider = SubResource("StyleBoxFlat_by4ni")
+
+[node name="Health" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y34yy")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 103.0
+offset_right = 713.0
+offset_bottom = 143.0
+mouse_filter = 2
+theme = SubResource("Theme_xdbl1")
+max_value = 3.0
+value = 3.0
+editable = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -2.0
+offset_right = 85.0
+offset_bottom = 126.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_8o4yj")

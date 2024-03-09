@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfeswyk3he353"]
+
+[ext_resource type="Script" path="res://Spawner/MonsterSpawner.cs" id="1_sba62"]
+[ext_resource type="PackedScene" uid="uid://kv5bjh5ier6q" path="res://Monster/Monster.tscn" id="2_2cg8g"]
+
+[node name="MonsterSpawner" type="Node2D"]
+script = ExtResource("1_sba62")
+MonsterScene = ExtResource("2_2cg8g")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

@@ -1,0 +1,264 @@
+[gd_scene load_steps=22 format=3 uid="uid://6sirf8e1u6aj"]
+
+[ext_resource type="Script" path="res://SpaceGame/SpaceGame.cs" id="1_4oowu"]
+[ext_resource type="PackedScene" uid="uid://36fhf0sa7ctf" path="res://UI/Score.tscn" id="1_fp4hq"]
+[ext_resource type="PackedScene" uid="uid://b60nhi7s8hp5p" path="res://Player/SpaceShip/SpaceShip.tscn" id="1_qj1ux"]
+[ext_resource type="PackedScene" uid="uid://bkhs5f3d8rfx1" path="res://Commons/InvisibleWall.tscn" id="2_0d6x2"]
+[ext_resource type="Texture2D" uid="uid://cqpx03aa7ex8b" path="res://Art/BackGround.png" id="2_6bp1t"]
+[ext_resource type="Script" path="res://SpaceGame/ParallaxBackgrounds.cs" id="2_fp05a"]
+[ext_resource type="PackedScene" uid="uid://cy3nfo0uya0iy" path="res://Particles/HitParticle.tscn" id="2_ouyps"]
+[ext_resource type="PackedScene" uid="uid://dsm0g68mosp3v" path="res://UI/Health.tscn" id="2_tlbog"]
+[ext_resource type="PackedScene" uid="uid://c3li2mhyttflf" path="res://Spawner/RocksSpawner.tscn" id="3_1njp3"]
+[ext_resource type="Texture2D" uid="uid://vho0gqtffqrv" path="res://Art/BigRingPlannet2.png" id="4_3pt2i"]
+[ext_resource type="Texture2D" uid="uid://butnnhngh832w" path="res://Art/Stars.png" id="4_c0wh7"]
+[ext_resource type="PackedScene" uid="uid://cfeswyk3he353" path="res://Spawner/MonsterSpawner.tscn" id="4_g4258"]
+[ext_resource type="Texture2D" uid="uid://bbe2krl3faely" path="res://Art/Clock.png" id="5_2w6yt"]
+[ext_resource type="Texture2D" uid="uid://b4gtfw24j6uit" path="res://Art/BigRingPlannet.png" id="5_adhre"]
+[ext_resource type="Texture2D" uid="uid://dpb33menqlt3m" path="res://Art/smallPlanet.png" id="6_rpucd"]
+[ext_resource type="PackedScene" uid="uid://du6nh87r63fco" path="res://Spawner/HealingSpawner.tscn" id="7_7gm8r"]
+[ext_resource type="PackedScene" uid="uid://b7m1dx5jbpujc" path="res://Beast/Beast.tscn" id="7_dr86s"]
+[ext_resource type="PackedScene" uid="uid://4erww50chkt4" path="res://UI/Menu/MenuMiniManager.tscn" id="9_h8lsp"]
+[ext_resource type="FontFile" uid="uid://djrjr2ca1kmpr" path="res://Art/alarm clock.ttf" id="10_j0y2m"]
+[ext_resource type="PackedScene" uid="uid://cdd36bn66ejmf" path="res://UI/Menu/MenuUi.tscn" id="13_td5l3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcocg"]
+size = Vector2(1997, 74)
+
+[node name="SpaceGame" type="Node2D" node_paths=PackedStringArray("monsterSpawner", "rockSpawner", "healSpawner", "canvasLayer", "backGround", "restartLabel")]
+script = ExtResource("1_4oowu")
+monsterSpawner = NodePath("MonsterSpawner")
+rockSpawner = NodePath("RocksSpawner")
+healSpawner = NodePath("HealingSpawner")
+canvasLayer = NodePath("CanvasLayer")
+backGround = NodePath("BACKGROUND")
+particleEvadeFreeze = ExtResource("2_ouyps")
+restartLabel = NodePath("CanvasLayer/RestartLabel")
+
+[node name="Paralaxx" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Paralaxx"]
+script = ExtResource("2_fp05a")
+
+[node name="BackGround" type="Sprite2D" parent="Paralaxx/ParallaxBackground"]
+texture = ExtResource("2_6bp1t")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Stars" type="ParallaxLayer" parent="Paralaxx/ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(325, 161)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(851, 416)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1448, 716)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1564, 235)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(967, 176)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(337, 475)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(895, 691)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1453, 475)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1645, 932)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(366, 972)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(286, 710)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(999, 948)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1640, 577)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D14" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1592, 153)
+texture = ExtResource("4_c0wh7")
+
+[node name="Sprite2D15" type="Sprite2D" parent="Paralaxx/ParallaxBackground/Stars"]
+position = Vector2(1592, 153)
+texture = ExtResource("4_c0wh7")
+
+[node name="BigPlanets" type="ParallaxLayer" parent="Paralaxx/ParallaxBackground"]
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Paralaxx/ParallaxBackground/BigPlanets"]
+position = Vector2(182, 828)
+rotation = 0.120428
+scale = Vector2(2.48833, 1.63969)
+texture = ExtResource("4_3pt2i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Paralaxx/ParallaxBackground/BigPlanets"]
+position = Vector2(1599, 881)
+rotation = -0.120428
+texture = ExtResource("4_3pt2i")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Paralaxx/ParallaxBackground/BigPlanets"]
+position = Vector2(360, 259)
+rotation = 0.359538
+texture = ExtResource("5_adhre")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Paralaxx/ParallaxBackground/BigPlanets"]
+position = Vector2(1110, 544)
+texture = ExtResource("5_adhre")
+
+[node name="SmallPlanets" type="ParallaxLayer" parent="Paralaxx/ParallaxBackground"]
+motion_scale = Vector2(1.5, 1.5)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Paralaxx/ParallaxBackground/SmallPlanets"]
+position = Vector2(1639, 497)
+texture = ExtResource("6_rpucd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Paralaxx/ParallaxBackground/SmallPlanets"]
+position = Vector2(1050, 910)
+rotation = 1.1973
+texture = ExtResource("6_rpucd")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Paralaxx/ParallaxBackground/SmallPlanets"]
+position = Vector2(514, 535)
+rotation = -1.56032
+texture = ExtResource("6_rpucd")
+
+[node name="MenuMiniManager" parent="." node_paths=PackedStringArray("menuUI", "ui") instance=ExtResource("9_h8lsp")]
+menuUI = NodePath("../CanvasLayer/MenuUI")
+ui = NodePath("../CanvasLayer/MenuUI")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("2_tlbog")]
+player = NodePath("../../SpaceShip")
+metadata/_edit_lock_ = true
+
+[node name="Score" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("1_fp4hq")]
+player = NodePath("../../SpaceShip")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 1702.0
+offset_top = 86.0
+offset_right = 1921.0
+offset_bottom = 207.0
+theme_override_fonts/font = ExtResource("10_j0y2m")
+theme_override_font_sizes/font_size = 120
+text = "200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Clock" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1576.0
+offset_top = 79.0
+offset_right = 1704.0
+offset_bottom = 207.0
+texture = ExtResource("5_2w6yt")
+
+[node name="MenuUI" parent="CanvasLayer" instance=ExtResource("13_td5l3")]
+
+[node name="RestartLabel" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 292.0
+offset_top = 195.0
+offset_right = 1671.0
+offset_bottom = 841.0
+theme_override_font_sizes/font_size = 166
+text = "Press R to restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpaceShip" parent="." instance=ExtResource("1_qj1ux")]
+position = Vector2(291, 559)
+speed = 500.0
+
+[node name="InvisibleWall" parent="." instance=ExtResource("2_0d6x2")]
+position = Vector2(355, -68)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall"]
+position = Vector2(599.5, 27)
+shape = SubResource("RectangleShape2D_hcocg")
+
+[node name="InvisibleWall2" parent="." instance=ExtResource("2_0d6x2")]
+position = Vector2(355, 1086)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall2"]
+position = Vector2(599.5, 27)
+shape = SubResource("RectangleShape2D_hcocg")
+
+[node name="InvisibleWall3" parent="." instance=ExtResource("2_0d6x2")]
+position = Vector2(-13, 45)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall3"]
+position = Vector2(599.5, 27)
+shape = SubResource("RectangleShape2D_hcocg")
+
+[node name="InvisibleWall4" parent="." instance=ExtResource("2_0d6x2")]
+position = Vector2(1984, 45)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWall4"]
+position = Vector2(599.5, 27)
+shape = SubResource("RectangleShape2D_hcocg")
+
+[node name="RocksSpawner" parent="." instance=ExtResource("3_1njp3")]
+
+[node name="MonsterSpawner" parent="." instance=ExtResource("4_g4258")]
+
+[node name="HealingSpawner" parent="." instance=ExtResource("7_7gm8r")]
+
+[node name="TimerOfTheBeast" type="Timer" parent="."]
+wait_time = 200.0
+one_shot = true
+autostart = true
+
+[node name="TimerWait" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Beast" parent="." node_paths=PackedStringArray("pointA", "pointB") instance=ExtResource("7_dr86s")]
+position = Vector2(2123, 16)
+pointA = NodePath("../PointA")
+pointB = NodePath("../PointB")
+
+[node name="BACKGROUND" type="ColorRect" parent="."]
+offset_right = 1918.0
+offset_bottom = 1099.0
+color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="PointA" type="Marker2D" parent="."]
+position = Vector2(3140, 555)
+
+[node name="PointB" type="Marker2D" parent="."]
+position = Vector2(45, -30)
+
+[connection signal="timeout" from="TimerOfTheBeast" to="." method="OnTimerTimeout"]
+[connection signal="timeout" from="TimerWait" to="." method="OnTimerWaitTimeout"]

@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://dharxu3dc5mkh"]
+
+[ext_resource type="Script" path="res://Rocks/Rocks.cs" id="1_lltu1"]
+[ext_resource type="Texture2D" uid="uid://q6qbgbteeu6v" path="res://Art/RocksArts/Rocks1.png" id="2_5fj7j"]
+[ext_resource type="PackedScene" uid="uid://r4fhthgo4slo" path="res://Commons/Components/HealthComponent.tscn" id="2_g1uhc"]
+[ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="3_gfetr"]
+[ext_resource type="Script" path="res://Rocks/RockSprite.cs" id="3_rg23m"]
+[ext_resource type="Texture2D" uid="uid://c030ll4vfa8kk" path="res://Art/RocksArts/Rocks2.png" id="4_ohj7e"]
+[ext_resource type="Texture2D" uid="uid://su2y6em6dnva" path="res://Art/RocksArts/Rocks3.png" id="5_70aj0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i1wt4"]
+radius = 34.1321
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdkj7"]
+radius = 39.0128
+
+[sub_resource type="Animation" id="Animation_ew1wu"]
+resource_name = "RockSpin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oxedm"]
+_data = {
+"RockSpin": SubResource("Animation_ew1wu")
+}
+
+[node name="Rocks" type="CharacterBody2D" groups=["Obstacle"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_lltu1")
+speed = 1000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, 1)
+rotation = 4.82879
+scale = Vector2(2.89, 2.89)
+texture = ExtResource("2_5fj7j")
+script = ExtResource("3_rg23m")
+texture1 = ExtResource("2_5fj7j")
+texture2 = ExtResource("4_ohj7e")
+texture3 = ExtResource("5_70aj0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i1wt4")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_g1uhc")]
+health = 1.0
+maxHealth = 1.0
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_gfetr")]
+collision_layer = 8
+collision_mask = 17
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_mdkj7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oxedm")
+}
+autoplay = "RockSpin"
+speed_scale = 0.6
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="OnHitboxComponentAreaEntered"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

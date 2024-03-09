@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4mkgr0wmvr4f"]
+
+[ext_resource type="Script" path="res://Player/SpaceShip/Bullet.cs" id="1_u5lea"]
+[ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="1_vkiku"]
+[ext_resource type="PackedScene" uid="uid://cy3nfo0uya0iy" path="res://Particles/HitParticle.tscn" id="2_dnyq3"]
+[ext_resource type="Texture2D" uid="uid://dt0ij6ad2xndc" path="res://Art/Projectile.png" id="2_wwkwe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk7kq"]
+size = Vector2(70, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cwss"]
+size = Vector2(71, 20)
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_u5lea")
+speed = 800.0
+particleHIt = ExtResource("2_dnyq3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(25, 3)
+scale = Vector2(2.5, 3)
+texture = ExtResource("2_wwkwe")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("1_vkiku")]
+collision_layer = 16
+collision_mask = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(25, 0)
+shape = SubResource("RectangleShape2D_nk7kq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25.5, 0)
+shape = SubResource("RectangleShape2D_5cwss")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="OnHitboxComponentAreaEntered"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

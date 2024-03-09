@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://36fhf0sa7ctf"]
+
+[ext_resource type="Script" path="res://UI/Score.cs" id="1_ih4lv"]
+
+[sub_resource type="Theme" id="Theme_brek1"]
+Label/font_sizes/font_size = 120
+
+[node name="Score" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_ih4lv")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 39.0
+offset_right = 1060.0
+offset_bottom = 204.0
+theme = SubResource("Theme_brek1")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

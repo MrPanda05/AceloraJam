@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://4erww50chkt4"]
+
+[ext_resource type="Script" path="res://UI/Menu/MenuMiniManager.cs" id="1_077ex"]
+
+[node name="MenuMiniManager" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_077ex")

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3e6cj6wc3kcf"]
+
+[ext_resource type="Script" path="res://Commons/Dialogue/Dialoguebox.cs" id="1_hrenw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whf14"]
+bg_color = Color(0, 0, 0, 0.129412)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_2fmjc"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_whf14")
+
+[sub_resource type="Theme" id="Theme_kywup"]
+
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("textLabel")]
+offset_left = 540.0
+offset_top = 877.0
+offset_right = 1386.0
+offset_bottom = 1048.0
+theme = SubResource("Theme_2fmjc")
+script = ExtResource("1_hrenw")
+textLabel = NodePath("HBoxContainer/Label")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = SubResource("Theme_kywup")
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+horizontal_alignment = 2
+vertical_alignment = 1

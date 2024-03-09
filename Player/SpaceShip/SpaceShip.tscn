@@ -1,0 +1,124 @@
+[gd_scene load_steps=23 format=3 uid="uid://b60nhi7s8hp5p"]
+
+[ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="1_5mrgp"]
+[ext_resource type="Script" path="res://Player/SpaceShip/SpaceShip.cs" id="1_f6nl0"]
+[ext_resource type="PackedScene" uid="uid://r4fhthgo4slo" path="res://Commons/Components/HealthComponent.tscn" id="2_2rjlr"]
+[ext_resource type="PackedScene" uid="uid://c4mkgr0wmvr4f" path="res://Player/SpaceShip/Bullet.tscn" id="2_pxs7u"]
+[ext_resource type="PackedScene" uid="uid://cy3nfo0uya0iy" path="res://Particles/HitParticle.tscn" id="3_5vsbn"]
+[ext_resource type="Texture2D" uid="uid://bm8chtlq6l66k" path="res://Art/SpaceShip1.png" id="3_lqa06"]
+[ext_resource type="PackedScene" uid="uid://p58i6ogpqa4a" path="res://Commons/FiniteStateMachine/Fsm.tscn" id="4_byt2x"]
+[ext_resource type="PackedScene" uid="uid://fixncwlpddtj" path="res://Commons/Components/SoundPool.tscn" id="4_c867l"]
+[ext_resource type="Texture2D" uid="uid://b3yi1q0g5l1uy" path="res://Art/SpaceShip2.png" id="4_r6pha"]
+[ext_resource type="Script" path="res://Player/SpaceShip/States/PlayState.cs" id="5_6we85"]
+[ext_resource type="Texture2D" uid="uid://idvi6kgyswpd" path="res://Art/SpaceShip3.png" id="5_a7i77"]
+[ext_resource type="AudioStream" uid="uid://cvyhpuk2h0kts" path="res://SoundsFX/laserShoot4.wav" id="5_cx1rf"]
+[ext_resource type="AudioStream" uid="uid://bq43xjxj4h5px" path="res://SoundsFX/laserShoot5.wav" id="6_0mdcg"]
+[ext_resource type="Texture2D" uid="uid://dm8fgloufvoa2" path="res://Art/SpaceShip4.png" id="6_vcskv"]
+[ext_resource type="AudioStream" uid="uid://iptvroerxe3m" path="res://SoundsFX/laserShoot6.wav" id="7_1mp7t"]
+[ext_resource type="Script" path="res://Player/SpaceShip/SpaceShipAnim.cs" id="7_suedm"]
+[ext_resource type="AudioStream" uid="uid://ccrdvgjuba3ua" path="res://SoundsFX/hitHurt.wav" id="8_qar3x"]
+[ext_resource type="AudioStream" uid="uid://dtvn1x50exb2r" path="res://SoundsFX/hitHurt2.wav" id="9_dants"]
+[ext_resource type="Script" path="res://Player/SpaceShip/States/PlayerDeath.cs" id="11_nka6b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nkua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lqa06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_r6pha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_a7i77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vcskv")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mogn"]
+size = Vector2(61, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h64pn"]
+size = Vector2(68, 50)
+
+[node name="SpaceShip" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "soundPool", "soundPoolHit") groups=["Player"]]
+collision_mask = 2
+script = ExtResource("1_f6nl0")
+speed = 650.0
+bullet = ExtResource("2_pxs7u")
+hitbox = NodePath("HitboxComponent")
+particleScene = ExtResource("3_5vsbn")
+soundPool = NodePath("SoundPoolLaser")
+soundPoolHit = NodePath("SoundPoolHit")
+
+[node name="SoundPoolLaser" parent="." instance=ExtResource("4_c867l")]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SoundPoolLaser"]
+stream = ExtResource("5_cx1rf")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="SoundPoolLaser"]
+stream = ExtResource("6_0mdcg")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="SoundPoolLaser"]
+stream = ExtResource("7_1mp7t")
+bus = &"SoundFX"
+
+[node name="SoundPoolHit" parent="." instance=ExtResource("4_c867l")]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SoundPoolHit"]
+stream = ExtResource("8_qar3x")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="SoundPoolHit"]
+stream = ExtResource("9_dants")
+bus = &"SoundFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, 2)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_7nkua")
+animation = &"fly"
+frame_progress = 0.808796
+script = ExtResource("7_suedm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 0.5)
+shape = SubResource("RectangleShape2D_2mogn")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("1_5mrgp")]
+collision_layer = 1
+collision_mask = 108
+priority = 1
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_h64pn")
+
+[node name="FSM" parent="." instance=ExtResource("4_byt2x")]
+process_mode = 1
+InitialState = NodePath("PlayState")
+
+[node name="PlayState" type="Node" parent="FSM"]
+script = ExtResource("5_6we85")
+
+[node name="PlayerDeath" type="Node" parent="FSM"]
+script = ExtResource("11_nka6b")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_2rjlr")]
+health = 3.0
+maxHealth = 3.0
+beDisable = true
+
+[node name="fireRate" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[connection signal="area_entered" from="HitboxComponent" to="FSM/PlayState" method="OnHitboxComponentAreaEntered"]

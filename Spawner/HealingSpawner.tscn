@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://du6nh87r63fco"]
+
+[ext_resource type="Script" path="res://Spawner/HealingSpawner.cs" id="1_4t8cn"]
+[ext_resource type="PackedScene" uid="uid://dow2ge34gpx8a" path="res://Rocks/HealItem.tscn" id="2_grp7t"]
+
+[node name="HealingSpawner" type="Node2D"]
+script = ExtResource("1_4t8cn")
+healItem = ExtResource("2_grp7t")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dow2ge34gpx8a"]
+
+[ext_resource type="Script" path="res://Rocks/HealItem.cs" id="1_gylri"]
+[ext_resource type="Texture2D" uid="uid://dgrlv0bqpt7xa" path="res://Art/HealthIP.png" id="2_eah8f"]
+[ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="2_wpyfp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctf62"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m7um0"]
+radius = 32.0156
+
+[node name="HealItem" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_gylri")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("2_eah8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ctf62")
+disabled = true
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_wpyfp")]
+collision_layer = 64
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_m7um0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="OnHitboxComponentAreaEntered"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
