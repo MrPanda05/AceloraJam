@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo51xg362q2c0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7qsl"]
+size = Vector2(194, 27)
+
+[node name="InvisibleWall" type="StaticBody2D"]
+collision_layer = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r7qsl")
+metadata/_edit_group_ = true

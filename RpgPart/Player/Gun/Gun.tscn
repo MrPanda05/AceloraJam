@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://qydj2a5iirr6"]
+
+[ext_resource type="Script" path="res://RpgPart/Player/Gun/Gun.cs" id="1_bjio1"]
+[ext_resource type="PackedScene" uid="uid://b45fui4ymw1d1" path="res://RpgPart/Player/Gun/Bullet.tscn" id="2_iijq3"]
+[ext_resource type="Texture2D" uid="uid://bw5u4t44g16id" path="res://icon.svg" id="2_iufvg"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_bjio1")
+bulletScene = ExtResource("2_iijq3")
+fireDelay = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 4.5)
+scale = Vector2(1, 0.195313)
+texture = ExtResource("2_iufvg")
+
+[node name="BulletHole" type="Marker2D" parent="."]
+
+[node name="FireRate" type="Timer" parent="."]
+one_shot = true

@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://kb416k7cvfnh"]
+
+[ext_resource type="PackedScene" uid="uid://c4uxo1k167gf5" path="res://RpgPart/Player/Player.tscn" id="1_unoa0"]
+[ext_resource type="PackedScene" uid="uid://dmxjr6rf3swaf" path="res://RpgPart/UpgradeStation/Upgrader.tscn" id="2_1dqsi"]
+[ext_resource type="PackedScene" uid="uid://dtdy4apx4uky1" path="res://RpgPart/RpgPartStatsHolder.tscn" id="3_qagbr"]
+[ext_resource type="PackedScene" uid="uid://p58i6ogpqa4a" path="res://Commons/FiniteStateMachine/Fsm.tscn" id="4_c112n"]
+[ext_resource type="PackedScene" uid="uid://iy5j55rlbgya" path="res://RpgPart/Enemies/Enemy.tscn" id="5_72dh2"]
+[ext_resource type="PackedScene" uid="uid://cpxp1n503x687" path="res://RpgPart/BreakableArea.tscn" id="6_iergl"]
+[ext_resource type="PackedScene" uid="uid://byjf1tpaviufb" path="res://RpgPart/Spawner/MonsterSpawner.tscn" id="7_rxwbb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbdos"]
+radius = 82.0
+
+[node name="TestRPG" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_unoa0")]
+position = Vector2(729, 443)
+planksCount = 2
+
+[node name="Upgrader" parent="." instance=ExtResource("2_1dqsi")]
+
+[node name="RpgPartStatsHolder" parent="." instance=ExtResource("3_qagbr")]
+
+[node name="GameFSM" parent="." instance=ExtResource("4_c112n")]
+InitialState = NodePath("WaitingForStartState")
+
+[node name="WaitingForStartState" type="Node" parent="GameFSM"]
+
+[node name="PlayingState" type="Node" parent="GameFSM"]
+
+[node name="BetweenRoundsState" type="Node" parent="GameFSM"]
+
+[node name="GameOver" type="Node" parent="GameFSM"]
+
+[node name="Enemy" parent="." instance=ExtResource("5_72dh2")]
+position = Vector2(997, 637)
+
+[node name="BreakableArea" parent="." instance=ExtResource("6_iergl")]
+position = Vector2(940, 853)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakableArea"]
+shape = SubResource("CircleShape2D_mbdos")
+
+[node name="MonsterSpawner" parent="." instance=ExtResource("7_rxwbb")]
+position = Vector2(-139, 867)

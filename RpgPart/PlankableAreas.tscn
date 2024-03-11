@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://do6yvnif6q2lf"]
+
+[ext_resource type="Script" path="res://RpgPart/PlankableAreas.cs" id="1_e3r1a"]
+[ext_resource type="Texture2D" uid="uid://bw5u4t44g16id" path="res://icon.svg" id="1_h8ey3"]
+[ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="1_jhuqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yif6v"]
+size = Vector2(138, 112)
+
+[node name="PlankableAreas" type="StaticBody2D"]
+script = ExtResource("1_e3r1a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 2)
+scale = Vector2(0.640625, 0.523438)
+texture = ExtResource("1_h8ey3")
+
+[node name="HitboxComponent" parent="." groups=["Plankable"] instance=ExtResource("1_jhuqr")]
+collision_layer = 128
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(4, 3)
+shape = SubResource("RectangleShape2D_yif6v")
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="OnHitboxComponentAreaEntered"]
+[connection signal="area_exited" from="HitboxComponent" to="." method="OnHitboxComponentAreaExited"]

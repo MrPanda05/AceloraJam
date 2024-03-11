@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtdy4apx4uky1"]
+
+[ext_resource type="Script" path="res://RpgPart/RpgPartStatsHolder.cs" id="1_ys4vn"]
+
+[node name="RpgPartStatsHolder" type="Node2D" groups=["GlobalStats"]]
+editor_description = "Hold the points, stats and commong things"
+script = ExtResource("1_ys4vn")
