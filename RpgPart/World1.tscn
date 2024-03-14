@@ -335,13 +335,13 @@ scale = Vector2(5.46, 5.46)
 texture = ExtResource("15_5o7du")
 
 [node name="SpawnPoint1" type="Node2D" parent="GamePlay"]
-position = Vector2(2281, 485)
+position = Vector2(2243, 485)
 
 [node name="SpawnPoint2" type="Node2D" parent="GamePlay"]
-position = Vector2(962, 1294)
+position = Vector2(956, 1329)
 
 [node name="SpawnPoint3" type="Node2D" parent="GamePlay"]
-position = Vector2(-142, 666)
+position = Vector2(-186, 660)
 
 [node name="TileSets" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -456,6 +456,7 @@ scale = Vector2(3.705, 3.705)
 texture = ExtResource("20_4t8s5")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("23_yg0kf")
 autoplay = true
 bus = &"Music"

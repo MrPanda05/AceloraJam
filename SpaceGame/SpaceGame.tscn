@@ -25,7 +25,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hcocg"]
 size = Vector2(1997, 74)
 
-[node name="SpaceGame" type="Node2D" node_paths=PackedStringArray("monsterSpawner", "rockSpawner", "healSpawner", "canvasLayer", "backGround", "restartLabel")]
+[node name="SpaceGame" type="Node2D" node_paths=PackedStringArray("monsterSpawner", "rockSpawner", "healSpawner", "canvasLayer", "backGround", "restartLabel", "music")]
 script = ExtResource("1_4oowu")
 monsterSpawner = NodePath("MonsterSpawner")
 rockSpawner = NodePath("RocksSpawner")
@@ -34,6 +34,7 @@ canvasLayer = NodePath("CanvasLayer")
 backGround = NodePath("BACKGROUND")
 particleEvadeFreeze = ExtResource("2_ouyps")
 restartLabel = NodePath("CanvasLayer/RestartLabel")
+music = NodePath("Music")
 
 [node name="Paralaxx" type="Node2D" parent="."]
 
