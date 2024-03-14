@@ -3,9 +3,10 @@
 [ext_resource type="Script" path="res://RpgPart/Spawner/MonsterSpawner.cs" id="1_fkgqb"]
 [ext_resource type="PackedScene" uid="uid://iy5j55rlbgya" path="res://RpgPart/Enemies/Enemy.tscn" id="2_yvbre"]
 
-[node name="MonsterSpawner" type="Node2D"]
+[node name="MonsterSpawner" type="Node2D" node_paths=PackedStringArray("spawnPoints")]
 script = ExtResource("1_fkgqb")
 monster = ExtResource("2_yvbre")
+spawnPoints = []
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

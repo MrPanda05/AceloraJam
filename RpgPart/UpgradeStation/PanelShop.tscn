@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq4q4s64ldc0v"]
+
+[ext_resource type="Theme" uid="uid://cq3r5o7e7nv52" path="res://RpgPart/UpgradeStation/PanelConsumablesTHEM,E.tres" id="1_anw83"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/PanelShop.cs" id="1_ofd3x"]
+
+[node name="Panel" type="Panel"]
+custom_minimum_size = Vector2(320, 350)
+offset_right = 320.0
+offset_bottom = 350.0
+theme = ExtResource("1_anw83")
+script = ExtResource("1_ofd3x")
+
+[node name="Tittle" type="Label" parent="."]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 128.0
+text = "place text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+text = "M$:0"
+horizontal_alignment = 1
+vertical_alignment = 1

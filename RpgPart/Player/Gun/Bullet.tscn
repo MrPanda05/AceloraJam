@@ -1,26 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://b45fui4ymw1d1"]
+[gd_scene load_steps=7 format=3 uid="uid://b45fui4ymw1d1"]
 
-[ext_resource type="Texture2D" uid="uid://bw5u4t44g16id" path="res://icon.svg" id="1_sa5b4"]
 [ext_resource type="Script" path="res://RpgPart/Player/Gun/Bullet.cs" id="1_sh5i0"]
+[ext_resource type="Texture2D" uid="uid://cg4kq5vh41yf0" path="res://Art/EnemiesArts/greenbulet.png" id="2_f8v2g"]
+[ext_resource type="PackedScene" uid="uid://0b4lmdq1uk5f" path="res://RpgPart/LeHit.tscn" id="2_u0odt"]
 [ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="3_my7v7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5asb"]
+size = Vector2(73, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxugn"]
-size = Vector2(29, 20)
+size = Vector2(73, 20)
 
 [node name="Bullet" type="CharacterBody2D" groups=["Bullet"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_sh5i0")
+particleHIt = ExtResource("2_u0odt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9.5, 0)
 shape = SubResource("RectangleShape2D_n5asb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4.5, 0)
-scale = Vector2(0.242187, 0.09375)
-texture = ExtResource("1_sa5b4")
+position = Vector2(9, 10)
+scale = Vector2(2.595, 2.595)
+texture = ExtResource("2_f8v2g")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 13.0
@@ -29,10 +33,12 @@ autostart = true
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_my7v7")]
 collision_layer = 16
-collision_mask = 32
+collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(4.5, 0)
+position = Vector2(9.5, 0)
 shape = SubResource("RectangleShape2D_qxugn")
 
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
+[connection signal="area_entered" from="HitboxComponent" to="." method="OnHitboxComponentAreaEntered"]
+[connection signal="body_entered" from="HitboxComponent" to="." method="OnHitboxComponentBodyEntered"]

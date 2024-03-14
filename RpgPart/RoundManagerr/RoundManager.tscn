@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjd0wcj4g6e20"]
+
+[ext_resource type="Script" path="res://RpgPart/RoundManagerr/RoundManager.cs" id="1_28a1d"]
+[ext_resource type="PackedScene" uid="uid://p58i6ogpqa4a" path="res://Commons/FiniteStateMachine/Fsm.tscn" id="2_e1j4k"]
+[ext_resource type="Script" path="res://RpgPart/RoundManagerr/States/FirstWave.cs" id="3_nc8bk"]
+[ext_resource type="Script" path="res://RpgPart/RoundManagerr/States/Wave.cs" id="4_q1e6s"]
+[ext_resource type="Script" path="res://RpgPart/RoundManagerr/States/Waiting.cs" id="5_jwo04"]
+
+[node name="RoundManager" type="Node2D" groups=["RoundManager"]]
+script = ExtResource("1_28a1d")
+
+[node name="FSM" parent="." instance=ExtResource("2_e1j4k")]
+InitialState = NodePath("FirstWave")
+
+[node name="FirstWave" type="Node" parent="FSM"]
+script = ExtResource("3_nc8bk")
+
+[node name="Wave" type="Node" parent="FSM"]
+script = ExtResource("4_q1e6s")
+
+[node name="Waiting" type="Node" parent="FSM"]
+script = ExtResource("5_jwo04")
+
+[node name="Timer" type="Timer" parent="FSM/Waiting"]
+wait_time = 30.0
+one_shot = true
+
+[connection signal="timeout" from="FSM/Waiting/Timer" to="FSM/Waiting" method="OnTimerTimeout"]

@@ -12,8 +12,7 @@ namespace SingleToons
     {
         public static AudioManager Instance { get; private set; }
 
-        [Export] private SoundPool rocksSounds, playerDeath, MonsterHit
-            ;
+        [Export] private SoundPool rocksSounds, playerDeath, MonsterHit, RPGMonsterHIt, PlanksBreaking, PlanksBreak;
         [Export] private AudioStreamPlayer healSound;
 
         public override void _Ready()
@@ -32,6 +31,18 @@ namespace SingleToons
         public void PlayMonsterhitSounds()
         {
             MonsterHit.PlayRandomSound();
+        }
+        public void PlayRPGMonter()
+        {
+            RPGMonsterHIt.PlayRandomSound();
+        }
+        public void PlanksBreakingSounds()
+        {
+            PlanksBreaking.PlayRandomSound();
+        }
+        public void PlanksBreakSounds()
+        {
+            PlanksBreak.PlayRandomSound();
         }
 
         public void PlayHealSound()

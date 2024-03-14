@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://duanc2jlfni05"]
+[gd_scene load_steps=19 format=3 uid="uid://duanc2jlfni05"]
 
 [ext_resource type="Script" path="res://Commons/Singletoons/AudioManager.cs" id="1_3pxfk"]
 [ext_resource type="PackedScene" uid="uid://fixncwlpddtj" path="res://Commons/Components/SoundPool.tscn" id="1_7xt0v"]
@@ -10,13 +10,24 @@
 [ext_resource type="AudioStream" uid="uid://vbmeffdonwcb" path="res://SoundsFX/Death4.wav" id="6_layiw"]
 [ext_resource type="AudioStream" uid="uid://ck414hsee86w5" path="res://SoundsFX/MonsterDeath2.wav" id="7_ac0mi"]
 [ext_resource type="AudioStream" uid="uid://n0urbam7bhxi" path="res://SoundsFX/Heal.wav" id="7_r5dv4"]
+[ext_resource type="AudioStream" uid="uid://r8twafex0b58" path="res://SoundsFX/meatMonsterDeath1.wav" id="11_yyhlc"]
+[ext_resource type="AudioStream" uid="uid://ctcujo3erge44" path="res://SoundsFX/meatMonsterDeath2.wav" id="12_rmttg"]
+[ext_resource type="AudioStream" uid="uid://bklf0nocmelbj" path="res://SoundsFX/meatMonsterDeath3.wav" id="13_lfafs"]
+[ext_resource type="AudioStream" uid="uid://ba80cep4ao2v6" path="res://SoundsFX/WoodHITTING1.wav" id="14_8japs"]
+[ext_resource type="AudioStream" uid="uid://b2wvl1d76txjt" path="res://SoundsFX/WoodHITTING2.wav" id="15_r14vr"]
+[ext_resource type="AudioStream" uid="uid://bk7f24jhjk1jk" path="res://SoundsFX/WoodHITTING3.wav" id="16_g1n1d"]
+[ext_resource type="AudioStream" uid="uid://doha8r5fy8oh2" path="res://SoundsFX/woodBreak.wav" id="17_uvndi"]
+[ext_resource type="AudioStream" uid="uid://dwbckuhsg2ls6" path="res://SoundsFX/breaking.wav" id="18_34ywo"]
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("rocksSounds", "playerDeath", "MonsterHit", "healSound")]
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("rocksSounds", "playerDeath", "MonsterHit", "RPGMonsterHIt", "PlanksBreaking", "PlanksBreak", "healSound")]
 process_mode = 3
 script = ExtResource("1_3pxfk")
 rocksSounds = NodePath("RockHitSounds")
 playerDeath = NodePath("PlayerDeathSounds")
 MonsterHit = NodePath("MonsterDeathSounds")
+RPGMonsterHIt = NodePath("MonsterHitSounds")
+PlanksBreaking = NodePath("PlanksBreaking")
+PlanksBreak = NodePath("PlanksOnBreak")
 healSound = NodePath("HealSound")
 
 [node name="RockHitSounds" parent="." instance=ExtResource("1_7xt0v")]
@@ -63,4 +74,45 @@ bus = &"SoundFX"
 [node name="HealSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_r5dv4")
 max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="MonsterHitSounds" parent="." instance=ExtResource("1_7xt0v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MonsterHitSounds"]
+stream = ExtResource("11_yyhlc")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="MonsterHitSounds"]
+stream = ExtResource("12_rmttg")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="MonsterHitSounds"]
+stream = ExtResource("13_lfafs")
+bus = &"SoundFX"
+
+[node name="PlanksBreaking" parent="." instance=ExtResource("1_7xt0v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlanksBreaking"]
+stream = ExtResource("14_8japs")
+max_polyphony = 3
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="PlanksBreaking"]
+stream = ExtResource("15_r14vr")
+max_polyphony = 3
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="PlanksBreaking"]
+stream = ExtResource("16_g1n1d")
+max_polyphony = 3
+bus = &"SoundFX"
+
+[node name="PlanksOnBreak" parent="." instance=ExtResource("1_7xt0v")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlanksOnBreak"]
+stream = ExtResource("17_uvndi")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="PlanksOnBreak"]
+stream = ExtResource("18_34ywo")
 bus = &"SoundFX"

@@ -1,5 +1,6 @@
 using Godot;
 using Player.SpaceShip;
+using SingleToons;
 using Spawners;
 using System;
 
@@ -84,6 +85,7 @@ namespace TheSpaceGame
         }
         public override void _Ready()
         {
+            SaveSystem.Add("hasSeenTheBeast", 0);
             GetTree().Paused = true;
             player = GetNode<SpaceShip>("SpaceShip");
             timerBeast = GetNode<Timer>("TimerOfTheBeast");
@@ -95,6 +97,11 @@ namespace TheSpaceGame
             Node2D newParticle = particleEvadeFreeze.Instantiate() as Node2D;
             AddChild(newParticle);
             newParticle.Position = new Vector2(-200, 0);
+        }
+        public override void _ExitTree()
+        {
+            player.OnPlayerDeath -= OnDeath;
+            player.OnRestartGame -= RestartGame;
         }
 
 

@@ -1,4 +1,5 @@
 using Godot;
+using RpgPart.RoundManagerr;
 using System;
 
 
@@ -8,23 +9,33 @@ namespace RpgPart.Spawners
     {
         private Timer timer;
 
-        private int spawnMax = 1, spawnCount = 0;
+        private RoundManager roundManager;
 
         [Export] public PackedScene monster;
 
+        [Export] Godot.Collections.Array<Node2D> spawnPoints;
+        
         public void SpawnMonsters()
         {
-            for (; spawnCount < spawnMax; spawnCount++)
-            {
-                CharacterBody2D newMonster = monster.Instantiate() as CharacterBody2D;
-                GetParent().AddChild(newMonster);
-                newMonster.Position = Position;
-            }
+            if (!roundManager.canSpawn) return;
+            if (roundManager.enemySpawned >= roundManager.maxEnemys) return;
+            CharacterBody2D newMonster = monster.Instantiate() as CharacterBody2D;
+            uint randSpawnPoint = GD.Randi() % 3;
+            GetParent().AddChild(newMonster);
+            newMonster.GlobalPosition = spawnPoints[(int)randSpawnPoint].GlobalPosition;
+            roundManager.enemyCount++;
+            roundManager.enemySpawned++;
+            GD.PrintErr($"Spawned my {roundManager.enemySpawned} of a total of {roundManager.maxEnemys}");
         }
 
         public void OnTimerTimeout()
         {
             SpawnMonsters();
+        }
+
+        public override void _Ready()
+        {
+            roundManager = GetTree().GetFirstNodeInGroup("RoundManager") as RoundManager;
         }
 
 

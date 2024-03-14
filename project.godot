@@ -12,18 +12,22 @@ config_version=5
 
 config/name="AceloraJam"
 config/tags=PackedStringArray("gamejam")
-run/main_scene="res://SpaceGame/SpaceGame.tscn"
+run/main_scene="res://WhatPath/FindRealPath.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="SaveData"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 AudioManager="*res://Commons/Singletoons/AudioManager.tscn"
+SaveSystem="*res://Commons/Singletoons/SaveSystem.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
@@ -85,6 +89,11 @@ Interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"echo":false,"script":null)
 ]
 }
+Enter={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -98,8 +107,9 @@ Interact={
 2d_physics/layer_8="PlankArea"
 2d_physics/layer_9="PlankSolid"
 2d_physics/layer_10="Breakable"
-2d_physics/layer_11="MonsterHit"
-2d_physics/layer_12="InvisibleWall"
+2d_physics/layer_11="InvisibleWall"
+2d_physics/layer_12="RepairArea"
+2d_physics/layer_13="PLAYERBLOCKER"
 
 [rendering]
 

@@ -1,27 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://do6yvnif6q2lf"]
+[gd_scene load_steps=7 format=3 uid="uid://do6yvnif6q2lf"]
 
 [ext_resource type="Script" path="res://RpgPart/PlankableAreas.cs" id="1_e3r1a"]
 [ext_resource type="Texture2D" uid="uid://bw5u4t44g16id" path="res://icon.svg" id="1_h8ey3"]
-[ext_resource type="PackedScene" uid="uid://yqjfbe83sniv" path="res://Commons/Components/HitboxComponent.tscn" id="1_jhuqr"]
+[ext_resource type="PackedScene" uid="uid://cpxp1n503x687" path="res://RpgPart/BreakableArea.tscn" id="3_tjjtq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yif6v"]
-size = Vector2(138, 112)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7013x"]
+size = Vector2(99, 83)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86qnm"]
+size = Vector2(178, 161)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drocw"]
+radius = 118.106
 
 [node name="PlankableAreas" type="StaticBody2D"]
+collision_layer = 256
+collision_mask = 32
 script = ExtResource("1_e3r1a")
 
+[node name="PlayerBlocker" type="StaticBody2D" parent="."]
+editor_description = "Blocks only the player"
+collision_layer = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBlocker"]
+position = Vector2(-1.5, 2.5)
+shape = SubResource("RectangleShape2D_7013x")
+debug_color = Color(0, 0, 0, 0.419608)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1, 2)
 scale = Vector2(0.640625, 0.523438)
 texture = ExtResource("1_h8ey3")
 
-[node name="HitboxComponent" parent="." groups=["Plankable"] instance=ExtResource("1_jhuqr")]
-collision_layer = 128
-collision_mask = 1
+[node name="BreakableArea" parent="." instance=ExtResource("3_tjjtq")]
+collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(4, 3)
-shape = SubResource("RectangleShape2D_yif6v")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakableArea"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_86qnm")
+debug_color = Color(0.792157, 0.0235294, 0.529412, 0.419608)
 
-[connection signal="area_entered" from="HitboxComponent" to="." method="OnHitboxComponentAreaEntered"]
-[connection signal="area_exited" from="HitboxComponent" to="." method="OnHitboxComponentAreaExited"]
+[node name="RepairArea" type="Area2D" parent="."]
+collision_layer = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RepairArea"]
+shape = SubResource("CircleShape2D_drocw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="BreakableArea" to="." method="OnBreakableAreaAreaEntered"]
+[connection signal="area_exited" from="BreakableArea" to="." method="OnBreakableAreaAreaExited"]
+[connection signal="area_entered" from="RepairArea" to="." method="OnRepairAreaAreaEntered"]
+[connection signal="area_exited" from="RepairArea" to="." method="OnRepairAreaAreaExited"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

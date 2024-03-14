@@ -1,3 +1,4 @@
+using Commons.Components;
 using Godot;
 using System;
 
@@ -16,6 +17,8 @@ namespace RpgPart.Playerer.GunPart
         [Export] public float bulletDamage = 1f;
         [Export] public float fireDelay = 1f;
 
+        private SoundPool pool;
+
         private Marker2D bulletPoint;
 
         private Vector2 mousePos, rotation;
@@ -28,6 +31,7 @@ namespace RpgPart.Playerer.GunPart
             player = GetParent() as CharacterBody2D;
             bulletPoint = GetNode<Marker2D>("BulletHole");
             fireRate = GetNode<Timer>("FireRate");
+            pool = GetNode<SoundPool>("SoundPool");
 
         }
 
@@ -35,6 +39,7 @@ namespace RpgPart.Playerer.GunPart
         {
             if (!fireRate.IsStopped()) return;
             fireRate.Start(fireDelay);
+            pool.PlayRandomSound();
             CharacterBody2D newBullet = bulletScene.Instantiate() as CharacterBody2D;
             GetParent().GetParent().AddChild(newBullet);
             newBullet.GlobalPosition = bulletPoint.GlobalPosition;
@@ -48,6 +53,7 @@ namespace RpgPart.Playerer.GunPart
             Position = rotation;
 
             LookAt(GetViewport().GetMousePosition());
+            //GD.Print(GetViewport().GetMousePosition());
 
         }
         public override void _PhysicsProcess(double delta)

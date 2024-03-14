@@ -23,7 +23,7 @@ namespace Commons.FiniteStateMachine
                     states[node.Name] = s;
                     s.FSM = this;
                     s.Readys();
-                    s.Exit();
+                    //s.Exit();
                 }
             }
 

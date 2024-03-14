@@ -13,17 +13,36 @@ namespace RpgPart.Playerer.GunPart
         private Vector2 mousePos, dire, vel;
 
         private Timer timer;
-
+        [Export] private PackedScene particleHIt;
+        //Node2D newParticle = particleHIt.Instantiate() as Node2D;
+        //GetParent().AddChild(newParticle);
+        //newParticle.Position = Position;
         public void GoToDir()
         {
             vel = new Vector2(dire.X, dire.Y).Normalized() * gun.bulletSpeed;
             Velocity = vel;
         }
+        public void OnHitboxComponentAreaEntered(Area2D area)
+        {
+            if (area.GetParent().IsInGroup("Monster"))
+            {
+                Node2D newParticle = particleHIt.Instantiate() as Node2D;
+                GetParent().AddChild(newParticle);
+                newParticle.Position = Position;
+            }
+        }
 
         public void OnTimerTimeout()
         {
-            GD.Print("Out of time");
+            //GD.Print("Out of time");
             QueueFree();
+        }
+        public void OnHitboxComponentBodyEntered(Node2D body)
+        {
+            if(body.Name == "NonSolid")
+            {
+                QueueFree();
+            }
         }
         public override void _Ready()
         {
@@ -34,8 +53,8 @@ namespace RpgPart.Playerer.GunPart
             mousePos = GetViewport().GetMousePosition();
             dire = mousePos - player.Position;
             LookAt(dire);
-            GD.Print(player.Name);
-            GD.Print(gun.Name);
+            //GD.Print(player.Name);
+            //GD.Print(gun.Name);
 
         }
 

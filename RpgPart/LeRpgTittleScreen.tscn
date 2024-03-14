@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://7ckg1gix6ki6"]
+
+[ext_resource type="Script" path="res://RpgPart/MainMenu.cs" id="1_7301y"]
+[ext_resource type="Theme" uid="uid://33sjaoimhe12" path="res://Themes/UIbuttons.tres" id="1_gechy"]
+[ext_resource type="PackedScene" uid="uid://cwp0x4qtmx5mu" path="res://RpgPart/UIpART/Settingfs.tscn" id="2_yb1hk"]
+
+[node name="LeRPGTittleScreen" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("Settings", "Buttons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7301y")
+Settings = NodePath("Settingfs")
+Buttons = NodePath("Buttons")
+
+[node name="BGColor" type="ColorRect" parent="CanvasLayer/MainMenu"]
+layout_mode = 0
+offset_left = -108.0
+offset_top = -75.0
+offset_right = 2042.0
+offset_bottom = 1158.0
+color = Color(0.376471, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Buttons" type="Control" parent="CanvasLayer/MainMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Give Up" type="Button" parent="CanvasLayer/MainMenu/Buttons"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 896.0
+offset_right = 1152.0
+offset_bottom = 1024.0
+theme = ExtResource("1_gechy")
+theme_override_font_sizes/font_size = 31
+text = "Give up
+"
+
+[node name="Settings" type="Button" parent="CanvasLayer/MainMenu/Buttons"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 704.0
+offset_right = 1152.0
+offset_bottom = 832.0
+theme = ExtResource("1_gechy")
+theme_override_font_sizes/font_size = 31
+text = "Settings
+"
+
+[node name="Start" type="Button" parent="CanvasLayer/MainMenu/Buttons"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 512.0
+offset_right = 1152.0
+offset_bottom = 640.0
+theme = ExtResource("1_gechy")
+theme_override_font_sizes/font_size = 31
+text = "Beggin Suffering
+"
+
+[node name="TittleScreen" type="Label" parent="CanvasLayer/MainMenu/Buttons"]
+layout_mode = 0
+offset_left = 438.0
+offset_top = 87.0
+offset_right = 1433.0
+offset_bottom = 473.0
+theme_override_font_sizes/font_size = 131
+text = "HELL 
+ROOM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settingfs" parent="CanvasLayer/MainMenu" node_paths=PackedStringArray("toBeEnable") instance=ExtResource("2_yb1hk")]
+visible = false
+toBeEnable = NodePath("../Buttons")
+
+[connection signal="button_down" from="CanvasLayer/MainMenu/Buttons/Give Up" to="CanvasLayer/MainMenu" method="OnGiveUpButtonDown"]
+[connection signal="button_down" from="CanvasLayer/MainMenu/Buttons/Settings" to="CanvasLayer/MainMenu" method="OnSettingsButtonDown"]
+[connection signal="button_down" from="CanvasLayer/MainMenu/Buttons/Start" to="CanvasLayer/MainMenu" method="OnStartButtonDown"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwp0x4qtmx5mu"]
+
+[ext_resource type="Script" path="res://RpgPart/UIpART/Settingfs.cs" id="1_ctrpn"]
+[ext_resource type="Theme" uid="uid://4xx1mlsgwa8r" path="res://Themes/VolumeSlider.tres" id="1_gcric"]
+[ext_resource type="Theme" uid="uid://33sjaoimhe12" path="res://Themes/UIbuttons.tres" id="3_kmxq1"]
+
+[node name="Settingfs" type="Control" node_paths=PackedStringArray("master", "music", "soundfx")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_ctrpn")
+master = NodePath("MasterVolume")
+music = NodePath("MusicVolume")
+soundfx = NodePath("SoundFXVolume")
+metadata/_edit_lock_ = true
+
+[node name="MasterLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 448.0
+offset_right = 1008.0
+offset_bottom = 511.0
+theme_override_font_sizes/font_size = 31
+text = "Master"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundFX" type="Label" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 640.0
+offset_right = 1016.0
+offset_bottom = 703.0
+theme_override_font_sizes/font_size = 31
+text = "SoundFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 840.0
+offset_right = 1016.0
+offset_bottom = 903.0
+theme_override_font_sizes/font_size = 31
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterVolume" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 512.0
+offset_right = 1088.0
+offset_bottom = 640.0
+theme = ExtResource("1_gcric")
+value = 25.0
+
+[node name="SoundFXVolume" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 704.0
+offset_right = 1088.0
+offset_bottom = 832.0
+theme = ExtResource("1_gcric")
+value = 25.0
+
+[node name="MusicVolume" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 896.0
+offset_right = 1088.0
+offset_bottom = 1024.0
+theme = ExtResource("1_gcric")
+value = 25.0
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 1016.0
+offset_right = 1016.0
+offset_bottom = 1072.0
+theme = ExtResource("3_kmxq1")
+text = "Return"
+
+[connection signal="value_changed" from="MasterVolume" to="." method="OnMasterVolumeValueChanged"]
+[connection signal="value_changed" from="SoundFXVolume" to="." method="OnSoundFxVolumeValueChanged"]
+[connection signal="value_changed" from="MusicVolume" to="." method="OnMusicVolumeValueChanged"]
+[connection signal="button_down" from="ReturnButton" to="." method="OnReturnButtonButtonDown"]

@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cqr3xvjwgwnt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6lx2m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s41dd"]
+bg_color = Color(0.83992, 0, 0.118416, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdaeg"]
+bg_color = Color(1, 0.32549, 0.4, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+HSlider/icons/grabber = SubResource("CompressedTexture2D_6lx2m")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_s41dd")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_cdaeg")

@@ -1,4 +1,5 @@
 using Godot;
+using SingleToons;
 using System;
 
 
@@ -28,6 +29,7 @@ namespace BeastOfRevelations
         }
         public override void _Ready()
         {
+            SaveSystem.Update("hasSeenTheBeast", 1);
             background.Visible = true;
             background.Color = new Color(0, 0, 0, 1);
             UnFadeToBlack();

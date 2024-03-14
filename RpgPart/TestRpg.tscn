@@ -1,45 +1,81 @@
-[gd_scene load_steps=9 format=3 uid="uid://kb416k7cvfnh"]
+[gd_scene load_steps=14 format=3 uid="uid://kb416k7cvfnh"]
 
+[ext_resource type="PackedScene" uid="uid://d0cv0gnwgtakj" path="res://RpgPart/UIpART/UIrpg.tscn" id="1_jq5hn"]
+[ext_resource type="PackedScene" uid="uid://cljasi6mhm42d" path="res://RpgPart/UIpART/Pause.tscn" id="1_k1cl2"]
 [ext_resource type="PackedScene" uid="uid://c4uxo1k167gf5" path="res://RpgPart/Player/Player.tscn" id="1_unoa0"]
+[ext_resource type="PackedScene" uid="uid://cjd0wcj4g6e20" path="res://RpgPart/RoundManagerr/RoundManager.tscn" id="1_xuk8e"]
 [ext_resource type="PackedScene" uid="uid://dmxjr6rf3swaf" path="res://RpgPart/UpgradeStation/Upgrader.tscn" id="2_1dqsi"]
 [ext_resource type="PackedScene" uid="uid://dtdy4apx4uky1" path="res://RpgPart/RpgPartStatsHolder.tscn" id="3_qagbr"]
 [ext_resource type="PackedScene" uid="uid://p58i6ogpqa4a" path="res://Commons/FiniteStateMachine/Fsm.tscn" id="4_c112n"]
-[ext_resource type="PackedScene" uid="uid://iy5j55rlbgya" path="res://RpgPart/Enemies/Enemy.tscn" id="5_72dh2"]
-[ext_resource type="PackedScene" uid="uid://cpxp1n503x687" path="res://RpgPart/BreakableArea.tscn" id="6_iergl"]
+[ext_resource type="PackedScene" uid="uid://do6yvnif6q2lf" path="res://RpgPart/PlankableAreas.tscn" id="7_p0eup"]
 [ext_resource type="PackedScene" uid="uid://byjf1tpaviufb" path="res://RpgPart/Spawner/MonsterSpawner.tscn" id="7_rxwbb"]
+[ext_resource type="PackedScene" uid="uid://bglng1iyjbgwt" path="res://RpgPart/UpgradeStation/ShopUi.tscn" id="8_dx2ey"]
+[ext_resource type="Script" path="res://RpgPart/States/Neutral.cs" id="8_f6hjg"]
+[ext_resource type="Script" path="res://RpgPart/States/PauseState.cs" id="9_jmlnf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mbdos"]
-radius = 82.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx407"]
+size = Vector2(106, 61)
 
 [node name="TestRPG" type="Node2D"]
+
+[node name="UIrpg" parent="." instance=ExtResource("1_jq5hn")]
+
+[node name="Pause" parent="." instance=ExtResource("1_k1cl2")]
+
+[node name="RpgPartStatsHolder" parent="." instance=ExtResource("3_qagbr")]
+
+[node name="RoundManager" parent="." node_paths=PackedStringArray("startLabel", "stats") instance=ExtResource("1_xuk8e")]
+startLabel = NodePath("../Label")
+stats = NodePath("../RpgPartStatsHolder")
 
 [node name="Player" parent="." instance=ExtResource("1_unoa0")]
 position = Vector2(729, 443)
 planksCount = 2
 
-[node name="Upgrader" parent="." instance=ExtResource("2_1dqsi")]
-
-[node name="RpgPartStatsHolder" parent="." instance=ExtResource("3_qagbr")]
+[node name="Upgrader" parent="." node_paths=PackedStringArray("ShopUI") groups=["Upgrader"] instance=ExtResource("2_1dqsi")]
+ShopUI = NodePath("../ShopUI")
 
 [node name="GameFSM" parent="." instance=ExtResource("4_c112n")]
-InitialState = NodePath("WaitingForStartState")
+process_mode = 3
+InitialState = NodePath("Neutral")
 
-[node name="WaitingForStartState" type="Node" parent="GameFSM"]
-
-[node name="PlayingState" type="Node" parent="GameFSM"]
-
-[node name="BetweenRoundsState" type="Node" parent="GameFSM"]
+[node name="Neutral" type="Node" parent="GameFSM"]
+script = ExtResource("8_f6hjg")
 
 [node name="GameOver" type="Node" parent="GameFSM"]
 
-[node name="Enemy" parent="." instance=ExtResource("5_72dh2")]
-position = Vector2(997, 637)
+[node name="PauseState" type="Node" parent="GameFSM"]
+script = ExtResource("9_jmlnf")
 
-[node name="BreakableArea" parent="." instance=ExtResource("6_iergl")]
-position = Vector2(940, 853)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakableArea"]
-shape = SubResource("CircleShape2D_mbdos")
-
-[node name="MonsterSpawner" parent="." instance=ExtResource("7_rxwbb")]
+[node name="MonsterSpawner" parent="." node_paths=PackedStringArray("spawnPoints") instance=ExtResource("7_rxwbb")]
 position = Vector2(-139, 867)
+spawnPoints = [NodePath("../SpawnPoint1"), NodePath("../SpawnPoint2"), NodePath("../SpawnPoint3")]
+
+[node name="PlankableAreas" parent="." node_paths=PackedStringArray("plankBlock") instance=ExtResource("7_p0eup")]
+position = Vector2(917, 967)
+plankBlock = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlankableAreas"]
+position = Vector2(0, 20.5)
+shape = SubResource("RectangleShape2D_tx407")
+
+[node name="SpawnPoint1" type="Node2D" parent="."]
+position = Vector2(1561, 239)
+
+[node name="SpawnPoint2" type="Node2D" parent="."]
+position = Vector2(1525, 966)
+
+[node name="SpawnPoint3" type="Node2D" parent="."]
+position = Vector2(150, 887)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 752.0
+offset_top = 317.0
+offset_right = 1205.0
+offset_bottom = 604.0
+text = "Pres enter to suffer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopUI" parent="." instance=ExtResource("8_dx2ey")]
+visible = false

@@ -1,0 +1,235 @@
+[gd_scene load_steps=15 format=3 uid="uid://bglng1iyjbgwt"]
+
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/ShopUi.cs" id="1_0i77w"]
+[ext_resource type="PackedScene" uid="uid://dq4q4s64ldc0v" path="res://RpgPart/UpgradeStation/PanelShop.tscn" id="1_72q76"]
+[ext_resource type="PackedScene" uid="uid://b5qo78gtmbexa" path="res://RpgPart/UpgradeStation/PanelConsumables.tscn" id="2_1htdm"]
+[ext_resource type="Theme" uid="uid://byom5sf05ovfs" path="res://RpgPart/UpgradeStation/ShopUiButtons.tres" id="3_7v6eg"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/HealthButtonUpgrade.cs" id="3_23f4e"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/PlankButtonCapacity.cs" id="4_7k1ol"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/DamageButtonUpgrade.cs" id="5_bcrr3"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/FirerateUpgrade.cs" id="6_7lfr7"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/HealButton.cs" id="8_rtoot"]
+[ext_resource type="Script" path="res://RpgPart/UpgradeStation/BuyPlankButtons.cs" id="9_g1af5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48h0y"]
+bg_color = Color(0.461862, 8.00174e-07, 1.44392e-07, 1)
+border_width_bottom = 10
+border_color = Color(0.268633, 3.65493e-07, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dl26h"]
+bg_color = Color(0.72549, 0, 0, 1)
+border_width_bottom = 10
+border_color = Color(0.461862, 8.00174e-07, 1.44392e-07, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vid2g"]
+bg_color = Color(0.268633, 3.65493e-07, 0, 1)
+border_width_bottom = 10
+border_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_twuc4"]
+Button/styles/hover = SubResource("StyleBoxFlat_48h0y")
+Button/styles/normal = SubResource("StyleBoxFlat_dl26h")
+Button/styles/pressed = SubResource("StyleBoxFlat_vid2g")
+
+[node name="ShopUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0i77w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 1808.0
+offset_bottom = 1024.0
+mouse_filter = 2
+color = Color(0.0862745, 0.160784, 0.0470588, 0.32549)
+metadata/_edit_lock_ = true
+
+[node name="Upgrades" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 224.0
+offset_right = 1612.0
+offset_bottom = 576.0
+columns = 4
+
+[node name="HealthUpgrade" parent="Upgrades" instance=ExtResource("1_72q76")]
+layout_mode = 2
+price = "3"
+name = "Health Upgrade"
+metadata/_edit_lock_ = true
+
+[node name="HealthButtonUpgrade" type="Button" parent="Upgrades/HealthUpgrade" node_paths=PackedStringArray("myPanel", "shopUI")]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 216.0
+offset_right = 208.0
+offset_bottom = 264.0
+theme = ExtResource("3_7v6eg")
+text = "BUY"
+script = ExtResource("3_23f4e")
+myPanel = NodePath("..")
+shopUI = NodePath("../../..")
+
+[node name="PlankCapacity" parent="Upgrades" instance=ExtResource("1_72q76")]
+layout_mode = 2
+price = "2"
+name = "Plank capacity"
+metadata/_edit_lock_ = true
+
+[node name="PlankButtonCapacity" type="Button" parent="Upgrades/PlankCapacity" node_paths=PackedStringArray("myPanel", "shopUI")]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 216.0
+offset_right = 208.0
+offset_bottom = 264.0
+theme = ExtResource("3_7v6eg")
+text = "BUY"
+script = ExtResource("4_7k1ol")
+myPanel = NodePath("..")
+shopUI = NodePath("../../..")
+
+[node name="DamageUpgrade" parent="Upgrades" instance=ExtResource("1_72q76")]
+layout_mode = 2
+price = "3"
+name = "Damage Update"
+metadata/_edit_lock_ = true
+
+[node name="DamageButtonUpgrade" type="Button" parent="Upgrades/DamageUpgrade" node_paths=PackedStringArray("myPanel", "shopUI")]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 216.0
+offset_right = 208.0
+offset_bottom = 264.0
+theme = ExtResource("3_7v6eg")
+text = "BUY"
+script = ExtResource("5_bcrr3")
+myPanel = NodePath("..")
+shopUI = NodePath("../../..")
+
+[node name="FirerateUpgrade" parent="Upgrades" instance=ExtResource("1_72q76")]
+layout_mode = 2
+price = "2"
+name = "Fire rate Upgrade"
+metadata/_edit_lock_ = true
+
+[node name="FirerateUpgrade" type="Button" parent="Upgrades/FirerateUpgrade" node_paths=PackedStringArray("myPanel", "shopUI")]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 216.0
+offset_right = 208.0
+offset_bottom = 264.0
+theme = ExtResource("3_7v6eg")
+text = "BUY"
+script = ExtResource("6_7lfr7")
+myPanel = NodePath("..")
+shopUI = NodePath("../../..")
+
+[node name="Upgrades2" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 704.0
+offset_right = 1276.0
+offset_bottom = 1004.0
+columns = 2
+
+[node name="Heal" parent="Upgrades2" instance=ExtResource("2_1htdm")]
+layout_mode = 2
+price = "2"
+name = "Heal"
+
+[node name="HealButton" type="Button" parent="Upgrades2/Heal" node_paths=PackedStringArray("myPanel", "shopUI")]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 208.0
+offset_right = 208.0
+offset_bottom = 256.0
+theme = ExtResource("3_7v6eg")
+text = "BUY"
+script = ExtResource("8_rtoot")
+myPanel = NodePath("..")
+shopUI = NodePath("../../..")
+
+[node name="BuyPlanks" parent="Upgrades2" instance=ExtResource("2_1htdm")]
+layout_mode = 2
+price = "1"
+name = "Planks"
+
+[node name="BuyPlankButtons" type="Button" parent="Upgrades2/BuyPlanks" node_paths=PackedStringArray("myPanel", "shopUI")]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 216.0
+offset_right = 208.0
+offset_bottom = 264.0
+theme = ExtResource("3_7v6eg")
+text = "BUY"
+script = ExtResource("9_g1af5")
+myPanel = NodePath("..")
+shopUI = NodePath("../../..")
+
+[node name="UpgradesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 112.0
+offset_right = 1168.0
+offset_bottom = 209.0
+theme_override_font_sizes/font_size = 71
+text = "UPGRADES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConsumablesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 608.0
+offset_right = 1168.0
+offset_bottom = 688.0
+theme_override_font_sizes/font_size = 36
+text = "Consumables"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1384.0
+offset_top = 776.0
+offset_right = 1706.0
+offset_bottom = 840.0
+theme_override_font_sizes/font_size = 36
+text = "You godt 45 points"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButto" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1552.0
+offset_top = 72.0
+offset_right = 1800.0
+offset_bottom = 152.0
+theme = SubResource("Theme_twuc4")
+text = "CLOSE"
+
+[connection signal="button_down" from="Upgrades/HealthUpgrade/HealthButtonUpgrade" to="Upgrades/HealthUpgrade/HealthButtonUpgrade" method="OnButtonDown"]
+[connection signal="button_down" from="Upgrades/PlankCapacity/PlankButtonCapacity" to="Upgrades/PlankCapacity/PlankButtonCapacity" method="OnButtonDown"]
+[connection signal="button_down" from="Upgrades/DamageUpgrade/DamageButtonUpgrade" to="Upgrades/DamageUpgrade/DamageButtonUpgrade" method="OnButtonDown"]
+[connection signal="button_down" from="Upgrades/FirerateUpgrade/FirerateUpgrade" to="Upgrades/FirerateUpgrade/FirerateUpgrade" method="OnButtonDown"]
+[connection signal="button_down" from="Upgrades2/Heal/HealButton" to="Upgrades2/Heal/HealButton" method="OnButtonDown"]
+[connection signal="button_down" from="Upgrades2/BuyPlanks/BuyPlankButtons" to="Upgrades2/BuyPlanks/BuyPlankButtons" method="OnButtonDown"]
+[connection signal="button_down" from="CloseButto" to="." method="OnCloseButtoButtonDown"]

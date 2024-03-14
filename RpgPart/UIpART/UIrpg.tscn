@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0cv0gnwgtakj"]
+
+[ext_resource type="Script" path="res://RpgPart/UIpART/UIrpg.cs" id="1_8ud64"]
+[ext_resource type="Theme" uid="uid://cqr3xvjwgwnt" path="res://RpgPart/UIpART/SliderGamer.tres" id="2_bk45t"]
+[ext_resource type="Texture2D" uid="uid://bbe2krl3faely" path="res://Art/Clock.png" id="2_hlh27"]
+[ext_resource type="FontFile" uid="uid://djrjr2ca1kmpr" path="res://Art/alarm clock.ttf" id="2_lnhtn"]
+[ext_resource type="Theme" uid="uid://darpn6ue7phj" path="res://RpgPart/UIpART/LabelTheme.tres" id="2_mjkom"]
+[ext_resource type="Texture2D" uid="uid://33otarornvnt" path="res://Art/EnemiesArts/Planks.png" id="3_mkce7"]
+[ext_resource type="Texture2D" uid="uid://b2iiabv0mv6e" path="res://Art/Heart.png" id="7_uun0u"]
+
+[node name="UIrpg" type="Control" node_paths=PackedStringArray("slider", "healthLabel", "pointsLabel", "plankLabel", "timeLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ud64")
+slider = NodePath("Healthbar")
+healthLabel = NodePath("HealthLabel")
+pointsLabel = NodePath("PointsLabel")
+plankLabel = NodePath("PlanksLabel")
+timeLabel = NodePath("TimerLabel")
+
+[node name="Healthbar" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 568.0
+offset_bottom = 215.0
+scale = Vector2(1, 2.30076)
+mouse_filter = 2
+theme = ExtResource("2_bk45t")
+max_value = 5.0
+value = 5.0
+allow_greater = true
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 112.0
+offset_right = 230.0
+offset_bottom = 195.0
+theme = ExtResource("2_mjkom")
+theme_override_font_sizes/font_size = 60
+text = "5/5"
+vertical_alignment = 1
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1696.0
+offset_top = 64.0
+offset_right = 1893.0
+offset_bottom = 174.0
+theme = ExtResource("2_mjkom")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlanksLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1672.0
+offset_top = 200.0
+offset_right = 1920.0
+offset_bottom = 310.0
+theme = ExtResource("2_mjkom")
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PlanksLabel"]
+layout_mode = 0
+offset_left = -96.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 120.0
+texture = ExtResource("3_mkce7")
+
+[node name="TimerLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1064.0
+offset_top = 80.0
+offset_right = 1144.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("2_lnhtn")
+theme_override_font_sizes/font_size = 90
+text = "30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TimerLabel"]
+layout_mode = 0
+offset_left = -136.0
+offset_top = -16.0
+offset_right = -8.0
+offset_bottom = 112.0
+texture = ExtResource("2_hlh27")
+
+[node name="TimerWai" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 128.0
+offset_right = 176.0
+offset_bottom = 336.0
+texture = ExtResource("7_uun0u")

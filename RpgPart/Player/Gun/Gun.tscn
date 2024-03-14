@@ -1,20 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://qydj2a5iirr6"]
+[gd_scene load_steps=7 format=3 uid="uid://qydj2a5iirr6"]
 
 [ext_resource type="Script" path="res://RpgPart/Player/Gun/Gun.cs" id="1_bjio1"]
 [ext_resource type="PackedScene" uid="uid://b45fui4ymw1d1" path="res://RpgPart/Player/Gun/Bullet.tscn" id="2_iijq3"]
-[ext_resource type="Texture2D" uid="uid://bw5u4t44g16id" path="res://icon.svg" id="2_iufvg"]
+[ext_resource type="Texture2D" uid="uid://bxsildh8ripxl" path="res://Art/EnemiesArts/gun.png" id="3_xwsf0"]
+[ext_resource type="PackedScene" uid="uid://fixncwlpddtj" path="res://Commons/Components/SoundPool.tscn" id="4_o0bsf"]
+[ext_resource type="AudioStream" uid="uid://0xa76tpbesxi" path="res://SoundsFX/GunShot.wav" id="5_if7wk"]
+[ext_resource type="AudioStream" uid="uid://bu20jmwloqmq1" path="res://SoundsFX/GunShot2.wav" id="6_0l153"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_bjio1")
 bulletScene = ExtResource("2_iijq3")
-fireDelay = 0.5
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 4.5)
-scale = Vector2(1, 0.195313)
-texture = ExtResource("2_iufvg")
+bulletSpeed = 500.0
+fireDelay = 0.7
 
 [node name="BulletHole" type="Marker2D" parent="."]
+position = Vector2(13, -3)
 
 [node name="FireRate" type="Timer" parent="."]
 one_shot = true
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_xwsf0")
+
+[node name="SoundPool" parent="." instance=ExtResource("4_o0bsf")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundPool"]
+stream = ExtResource("5_if7wk")
+max_polyphony = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SoundPool"]
+stream = ExtResource("6_0l153")
+max_polyphony = 2
+bus = &"SoundFX"

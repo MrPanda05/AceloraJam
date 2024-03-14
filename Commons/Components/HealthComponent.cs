@@ -6,7 +6,7 @@ namespace Commons.Components
     public partial class HealthComponent : Node2D
     {
         [Export] public float health;
-        [Export] private float maxHealth;
+        [Export] public float maxHealth;
 
         [Export] private bool beDisable = false;
 

@@ -1,6 +1,8 @@
 using Commons.Components;
 using Commons.FiniteStateMachine;
 using Godot;
+using RpgPart.States;
+using SingleToons;
 using System;
 using System.Threading.Tasks;
 
@@ -13,6 +15,7 @@ namespace RpgPart.Enemies
 
         [Export] private HitboxComponent hitbox;
         [Export] private HealthComponent health;
+        [Export] public NavigationAgent2D navigationAgent;
 
 
         [Export] private Fsm fsm;
@@ -25,6 +28,15 @@ namespace RpgPart.Enemies
 
         public bool isOnBreakable;
 
+        public static Action OnEnemyDeath;
+        public void SignalDeath()
+        {
+            OnEnemyDeath?.Invoke();
+        }
+        public void ForceRestart()
+        {
+            QueueFree();
+        }
         public void OnTimerTimeout()
         {
             if (!isOnBreakable) return;
@@ -38,7 +50,15 @@ namespace RpgPart.Enemies
             timer = GetNode<Timer>("Timer");
             myDamage = stats.enemyDamage;
             health.health = stats.enemyHealth;
+            health.OnDeath += SignalDeath;
+            GD.Print($"Spawned with {myDamage} of damge and {health.health} health");
 
+
+        }
+
+        public override void _ExitTree()
+        {
+            health.OnDeath -= SignalDeath;
         }
 
         public void OnHitboxComponentAreaEntered(Area2D area)
@@ -47,26 +67,11 @@ namespace RpgPart.Enemies
             {
                 area.GetParent().QueueFree();
                 hitbox.Damage(stats.playerDamage);
-                GD.Print("Got hit");
-                return;
-            }
-            if (area.IsInGroup("Breakable"))
-            {
-                isOnBreakable = true;
-                timer.Start();
-                GD.Print("Started breaking");
+                AudioManager.Instance.PlayRPGMonter();
+                //GD.Print("Got hit");
                 return;
             }
         }
-
-        public void OnHitboxComponentAreaExited(Area2D area)
-        {
-            if (area.IsInGroup("Breakable"))
-            {
-                isOnBreakable = false;
-                timer.Stop();
-                GD.Print("Stoped breaking");
-            }
-        }
+        
     }
 }

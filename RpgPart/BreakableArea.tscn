@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cpxp1n503x687"]
 
 [node name="BreakableArea" type="Area2D" groups=["Breakable"]]
+editor_description = "Detect enemiess"
 collision_layer = 512
 collision_mask = 1024

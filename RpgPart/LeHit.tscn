@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://0b4lmdq1uk5f"]
+
+[ext_resource type="Script" path="res://Particles/HitParticle.cs" id="1_3e77g"]
+
+[sub_resource type="Curve" id="Curve_3lcio"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0280899, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_jc028"]
+offsets = PackedFloat32Array(0, 0.32, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.945098, 0.231373, 0, 1, 0, 0, 0, 1)
+
+[node name="LeHit" type="Node2D" node_paths=PackedStringArray("particle")]
+script = ExtResource("1_3e77g")
+particle = NodePath("CPUParticles2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 5
+emitting = false
+amount = 60
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 400.0
+scale_amount_min = 10.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_3lcio")
+color = Color(0.490196, 0, 0.152941, 1)
+color_ramp = SubResource("Gradient_jc028")

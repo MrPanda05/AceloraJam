@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmb5006qmyd8p"]
+
+[ext_resource type="Script" path="res://Commons/Singletoons/SaveSystem.cs" id="1_phjo4"]
+
+[node name="SaveSystem" type="Node"]
+script = ExtResource("1_phjo4")

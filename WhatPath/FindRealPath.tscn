@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://biqlld1068d3t"]
+
+[ext_resource type="Script" path="res://WhatPath/FindRealPath.cs" id="1_67tir"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_67tir")

@@ -1,10 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cidceclyoe8c"]
+[gd_scene load_steps=2 format=3 uid="uid://cidceclyoe8c"]
 
 [ext_resource type="PackedScene" uid="uid://do6yvnif6q2lf" path="res://RpgPart/PlankableAreas.tscn" id="1_j4nkp"]
-[ext_resource type="PackedScene" uid="uid://cpxp1n503x687" path="res://RpgPart/BreakableArea.tscn" id="2_nm0b5"]
 
 [node name="PlankableSpot" type="Node2D"]
 
-[node name="PlankableAreas" parent="." instance=ExtResource("1_j4nkp")]
-
-[node name="BreakableArea" parent="." instance=ExtResource("2_nm0b5")]
+[node name="Blo" parent="." instance=ExtResource("1_j4nkp")]
