@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://by76v8ay74ctt"]
+[gd_scene load_steps=37 format=3 uid="uid://by76v8ay74ctt"]
 
 [ext_resource type="Script" path="res://RpgPart/World1.cs" id="1_3koc6"]
 [ext_resource type="PackedScene" uid="uid://d0cv0gnwgtakj" path="res://RpgPart/UIpART/UIrpg.tscn" id="1_cyflo"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://erv8e17ws8tv" path="res://Art/bed.png" id="18_1t6ou"]
 [ext_resource type="Texture2D" uid="uid://db184aq0ek5uf" path="res://Art/armario.png" id="19_fsriu"]
 [ext_resource type="Texture2D" uid="uid://bwr2558lev1c1" path="res://Art/carpet.png" id="20_4t8s5"]
+[ext_resource type="AudioStream" uid="uid://c0aomdvnrwewb" path="res://Music/SadPart.wav" id="23_yg0kf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p8m0"]
 size = Vector2(143.382, 61)
@@ -453,3 +454,8 @@ position = Vector2(-163, 21)
 rotation = 1.16937
 scale = Vector2(3.705, 3.705)
 texture = ExtResource("20_4t8s5")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_yg0kf")
+autoplay = true
+bus = &"Music"

@@ -16,6 +16,7 @@ namespace TheSpaceGame
         [Export] private ColorRect backGround;
         [Export] private PackedScene particleEvadeFreeze;
         [Export] private Label restartLabel;
+        [Export] private AudioStreamPlayer music;
 
 
         private SpaceShip player;
@@ -68,6 +69,7 @@ namespace TheSpaceGame
         {
             if (!invokeBeast) return;
             OnBeastArrive?.Invoke();
+            music.Stop();
             canvasLayer.Visible = false;
             timerWait.Start();
             player.hitbox.healthComponent.health += 100;

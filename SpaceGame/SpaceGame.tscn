@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://6sirf8e1u6aj"]
+[gd_scene load_steps=23 format=3 uid="uid://6sirf8e1u6aj"]
 
 [ext_resource type="Script" path="res://SpaceGame/SpaceGame.cs" id="1_4oowu"]
 [ext_resource type="PackedScene" uid="uid://36fhf0sa7ctf" path="res://UI/Score.tscn" id="1_fp4hq"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://4erww50chkt4" path="res://UI/Menu/MenuMiniManager.tscn" id="9_h8lsp"]
 [ext_resource type="FontFile" uid="uid://djrjr2ca1kmpr" path="res://Art/alarm clock.ttf" id="10_j0y2m"]
 [ext_resource type="PackedScene" uid="uid://cdd36bn66ejmf" path="res://UI/Menu/MenuUi.tscn" id="13_td5l3"]
+[ext_resource type="AudioStream" uid="uid://0tty6lt2v864" path="res://Music/happyMusic2.wav" id="21_ef0ce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hcocg"]
 size = Vector2(1997, 74)
@@ -259,6 +260,12 @@ position = Vector2(3140, 555)
 
 [node name="PointB" type="Marker2D" parent="."]
 position = Vector2(45, -30)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("21_ef0ce")
+autoplay = true
+bus = &"Music"
 
 [connection signal="timeout" from="TimerOfTheBeast" to="." method="OnTimerTimeout"]
 [connection signal="timeout" from="TimerWait" to="." method="OnTimerWaitTimeout"]
